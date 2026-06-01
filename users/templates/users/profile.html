@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+
+<style>
+.profile-header {
+    background: white;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+}
+
+.username {
+    font-size: 28px;
+    font-weight: bold;
+    color: #111827;
+}
+
+.user-email {
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+.logout-btn {
+    display: inline-block;
+    margin-top: 15px;
+    background: #ef4444;
+    color: white;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    transition: 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: #dc2626;
+}
+
+.section-title {
+    margin: 25px 0 15px;
+    font-size: 22px;
+    color: #111827;
+}
+
+/* competencies */
+.competency-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+}
+
+.competency-card {
+    background: white;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+
+.comp-name {
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.progress-line {
+    width: 100%;
+    height: 10px;
+    background: #e5e7eb;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #2563eb, #3b82f6);
+}
+
+.comp-level {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #374151;
+}
+
+/* history */
+.history-card {
+    background: white;
+    border-radius: 16px;
+    padding: 18px;
+    margin-bottom: 14px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+
+.history-title {
+    font-weight: 600;
+    color: #111827;
+}
+
+.history-meta {
+    margin-top: 8px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.status-badge {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #dcfce7;
+    color: #166534;
+}
+</style>
+
+<div class="profile-header">
+
+    <div class="username">
+        👤 {{ request.user.username }}
+    </div>
+
+    <div class="user-email">
+        {{ request.user.email }}
+    </div>
+
+
+    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="logout-btn">
+            Выйти
+        </button>
+    </form>
+</div>
+
+<h2 class="section-title">
+    Компетенции
+</h2>
+
+<div class="competency-grid">
+
+    {% for uc in competencies %}
+
+        <div class="competency-card">
+
+            <div class="comp-name">
+                {{ uc.competency.name }}
+            </div>
+
+            <div class="progress-line">
+                <div class="progress-fill"
+                     style="width: {% widthratio uc.level 1 100 %}%;">
+                </div>
+            </div>
+
+            <div class="comp-level">
+                Уровень: {{ uc.level|floatformat:2 }}
+            </div>
+
+        </div>
+
+    {% empty %}
+
+        <p>Компетенции пока отсутствуют.</p>
+
+    {% endfor %}
+
+</div>
+
+<h2 class="section-title">
+    История прохождений
+</h2>
+
+{% for p in progresses %}
+
+    <div class="history-card">
+
+        <div class="history-title">
+            {{ p.course.title }}
+        </div>
+
+        <div class="history-meta">
+            Успешность:
+            {% widthratio p.score 1 100 %}%
+        </div>
+
+        {% if p.completed %}
+            <div class="status-badge">
+                Завершён
+            </div>
+        {% endif %}
+
+    </div>
+
+{% empty %}
+
+    <p>Вы ещё не проходили курсы.</p>
+
+{% endfor %}
+
+{% endblock %}
