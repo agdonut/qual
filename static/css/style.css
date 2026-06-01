@@ -1,0 +1,683 @@
+/* =========================
+   БАЗОВЫЕ СТИЛИ
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: Arial, sans-serif;
+
+    background: #f5f7fb;
+    color: #3f2c50;
+
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* Контейнер */
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.site-header {
+    background: #4f4dbd;
+    color: white;
+
+    padding: 20px 0;
+
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    margin: 0 0 20px 0;
+    font-size: 24px;
+}
+
+/* Навигация */
+
+.nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition: opacity 0.2s ease;
+}
+
+.nav a:hover {
+    opacity: 0.8;
+}
+
+/* Панель пользователя */
+
+.user-panel {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.username {
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.auth-btn {
+    background: white;
+    color: #1f2937;
+
+    padding: 10px 16px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+    font-weight: bold;
+
+    transition: 0.2s ease;
+}
+
+.auth-btn:hover {
+    background: #e5e7eb;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main-content {
+    flex: 1;
+    padding: 40px 0;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.site-footer {
+    background: #4f4dbd;
+    color: white;
+
+    text-align: center;
+
+    padding: 25px 0;
+
+    margin-top: 40px;
+}
+
+.site-footer p {
+    margin: 5px 0;
+}
+
+/* =========================
+   СЕТКА КУРСОВ
+========================= */
+
+.courses-grid {
+    display: grid;
+
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(300px, 1fr)
+    );
+
+    gap: 30px;
+
+    padding: 20px 0;
+}
+
+/* =========================
+   КАРТОЧКА КУРСА
+========================= */
+
+.course-card {
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+    text-decoration: none;
+
+    color: #333;
+
+    display: block;
+}
+
+.course-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* =========================
+   ИЗОБРАЖЕНИЕ КУРСА
+========================= */
+
+.course-card img {
+    width: 100%;
+    height: 220px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+/* Заглушка */
+
+.course-card .no-image {
+    width: 100%;
+    height: 220px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #667eea 0%,
+            #764ba2 100%
+        );
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    font-size: 48px;
+    font-weight: bold;
+}
+
+/* =========================
+   ТЕКСТ КАРТОЧКИ
+========================= */
+
+.course-card .course-title {
+    padding: 20px;
+
+    font-size: 1.2em;
+    font-weight: 700;
+
+    text-align: center;
+
+    color: #2c3e50;
+
+    margin: 0;
+}
+
+/* Доп инфо */
+
+.course-card .course-info {
+    padding: 0 20px 20px;
+
+    text-align: center;
+
+    color: #7f8c8d;
+
+    font-size: 0.9em;
+}
+
+/* =========================
+   КНОПКИ
+========================= */
+
+button {
+    background: #2563eb;
+    color: white;
+
+    border: none;
+
+    padding: 10px 18px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: 0.2s ease;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+/* =========================
+   ФОРМЫ
+========================= */
+
+input,
+textarea,
+select {
+    width: 100%;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    border: 1px solid #d1d5db;
+
+    margin-bottom: 15px;
+
+    font-size: 14px;
+
+    font-family: Arial, sans-serif;
+}
+
+/* =========================
+   АДАПТИВ
+========================= */
+
+@media (max-width: 768px) {
+
+    .header-content {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
+
+    .nav {
+        flex-wrap: wrap;
+    }
+
+    .courses-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* =========================
+   AUTH (LOGIN / REGISTER)
+========================= */
+
+.auth-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.auth-card {
+    width: 360px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+
+    text-align: center;
+}
+
+.auth-card h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #1f2937;
+}
+
+.auth-card .form-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+/* делаем инпуты в стиле сайта */
+.auth-card input {
+    width: 100%;
+    padding: 12px;
+
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+
+    font-size: 14px;
+}
+
+/* кнопка используем твою основную */
+.auth-card button {
+    width: 100%;
+}
+.test-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.question-block {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.page-title {
+    margin-bottom: 20px;
+}
+/* =========================
+   ANSWERS (TEST UI)
+========================= */
+
+.answers {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.answer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px 14px;
+
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.answer:hover {
+    background: #eef2ff;
+    border-color: #c7d2fe;
+}
+
+.answer input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: #2563eb;
+}
+
+.answer span {
+    flex: 1;
+    font-size: 14px;
+    color: #1f2937;
+}
+.result-card {
+    max-width: 500px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    text-align: center;
+}
+
+.result-title {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #1f2937;
+}
+
+.result-subtitle {
+    color: #6b7280;
+    margin-bottom: 25px;
+}
+
+.result-stats {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.stat {
+    flex: 1;
+    background: #f9fafb;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+.stat .label {
+    display: block;
+    font-size: 12px;
+    color: #6b7280;
+    margin-bottom: 5px;
+}
+
+.stat .value {
+    font-size: 20px;
+    font-weight: bold;
+    color: #111827;
+}
+
+.back-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 16px;
+    background: #2563eb;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.2s ease;
+}
+
+.back-btn:hover {
+    background: #1d4ed8;
+}
+.my-courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.my-course-card {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.course-status {
+    margin: 0;
+}
+
+.status {
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status.success {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status.progress {
+    background: #fef9c3;
+    color: #854d0e;
+}
+
+.progress-line {
+    width: 100%;
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #2563eb;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.open-course-btn {
+    margin-top: auto;
+    display: inline-block;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.2s ease;
+}
+
+.open-course-btn:hover {
+    background: #1d4ed8;
+}
+.complete-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.complete-btn {
+    background: #2954a5;
+    color: white;
+
+    padding: 12px 22px;
+    border: none;
+    border-radius: 10px;
+
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.complete-btn:hover {
+    background: #16a34a;
+}
+.trajectory {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.course-pill {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #ffffff, #f3f4f6);
+    border-radius: 14px;
+    padding: 10px 14px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    transition: 0.2s ease;
+}
+
+.course-pill:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+
+.course-index {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #2563eb;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    margin-right: 10px;
+}
+
+.course-info a {
+    text-decoration: none;
+    color: #111827;
+    font-weight: 600;
+}
+
+.course-info a:hover {
+    color: #2563eb;
+}
+
+.course-meta {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.arrow {
+    font-size: 18px;
+    margin: 0 5px;
+    color: #9ca3af;
+}
+
+.username-link {
+    text-decoration: none;
+    color: #e8ecf5;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.username-link:hover {
+    color: #a99df7;
+}
+
+.username-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 10px 16px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 14px;
+
+    background: #ffffff;
+
+    color: #111827;
+    text-decoration: none;
+    font-weight: 600;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+
+    transition: all 0.2s ease;
+}
+
+.username-link:hover {
+    transform: translateY(-2px);
+
+    border-color: #a99df7;
+
+    box-shadow: 0 6px 16px rgba(37,99,235,0.18);
+
+    color: #a99df7;
+}

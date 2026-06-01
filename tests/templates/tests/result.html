@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Результат{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="result-card">
+
+        <h1 class="result-title">Результат теста</h1>
+
+        <p class="result-subtitle">
+            Урок: <b>{{ test.lesson.title }}</b>
+        </p>
+
+        <div class="result-stats">
+            <div class="stat">
+                <span class="label">Правильных ответов</span>
+                <span class="value">{{ correct_answers }} / {{ total_questions }}</span>
+            </div>
+
+            <div class="stat">
+                <span class="label">Процент</span>
+                <span class="value">
+                    {% widthratio correct_answers total_questions 100 %}%
+                </span>
+            </div>
+        </div>
+
+        <a href="{{ test.lesson.course.get_absolute_url }}" class="back-btn">
+            ← Вернуться к курсу
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block title %}Рекомендации{% endblock %}
+
+{% block content %}
+
+<style>
+body {
+    background: #f3f4f6;
+}
+
+/* ===== TRAJECTORY CARD ===== */
+.recommendation-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    padding: 24px;
+    margin-bottom: 30px;
+    transition: 0.25s ease;
+}
+
+.recommendation-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+.recommendation-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 15px;
+}
+
+/* ===== METRICS ===== */
+.metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.metric-box {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.metric-box b {
+    color: #111827;
+}
+
+/* ===== TIMELINE ===== */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 10px;
+}
+
+.course-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    border-radius: 14px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    position: relative;
+}
+
+.step-number {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #2563eb;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.course-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.course-title {
+    font-weight: 600;
+    color: #111827;
+    text-decoration: none;
+}
+
+.course-title:hover {
+    color: #2563eb;
+}
+
+.course-sub {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+
+
+.course-step:last-child::after {
+    display: none;
+}
+
+/* badge */
+.badge {
+    margin-left: auto;
+    background: #e0f2fe;
+    color: #0369a1;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+</style>
+
+{% for t in trajectories %}
+<div class="recommendation-card">
+
+    <div class="recommendation-title">
+        Траектория обучения №{{ forloop.counter }}
+    </div>
+
+    <div class="metrics">
+        <div class="metric-box">
+            <b>Успех:</b> {{ t.success|floatformat:1 }}%
+        </div>
+
+        <div class="metric-box">
+            <b>Прирост:</b> {% widthratio t.delta_k 1 100 %}/100
+        </div>
+
+        <div class="metric-box">
+            <b>Время:</b> {{ t.time|floatformat:0 }} ч.
+        </div>
+    </div>
+
+    <div class="timeline">
+        {% for course in t.courses %}
+        <div class="course-step">
+
+            <div class="step-number">
+                {{ forloop.counter }}
+            </div>
+
+            <div class="course-info">
+                <a class="course-title" href="{{ course.get_absolute_url }}">
+                    {{ course.title }}
+                </a>
+                <div class="course-sub">
+                    Уровень: {{ course.difficulty|default:"—" }}
+                </div>
+            </div>
+
+            <div class="badge">
+                шаг {{ forloop.counter }}
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endfor %}
+
+{% endblock %}

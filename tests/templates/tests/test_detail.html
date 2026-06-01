@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Тест{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="page-title">Тест по уроку: {{ test.lesson.title }}</h1>
+
+    <form method="post" class="test-form">
+        {% csrf_token %}
+
+        {% for question in test.question_set.all %}
+            <div class="question-block">
+
+                <h3 class="question-title">{{ question.text }}</h3>
+
+                <div class="answers">
+                    {% for answer in question.answer_set.all %}
+                        <label class="answer">
+                            <input
+                                type="radio"
+                                name="question_{{ question.id }}"
+                                value="{{ answer.id }}"
+                            >
+                            <span>{{ answer.text }}</span>
+                        </label>
+                    {% endfor %}
+                </div>
+
+            </div>
+        {% endfor %}
+
+        <button type="submit">
+            Закончить тест
+        </button>
+
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>
+        {% block title %}
+            Платформа повышения квалификации
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <div class="container header-content">
+
+        <div>
+            <h2 class="logo">
+                Платформа повышения квалификации
+            </h2>
+
+            <nav class="nav">
+                <a href="/">Главная</a>
+                <a href="/courses/my/">Мои курсы</a>
+                <a href="/recommend/">Рекомендации</a>
+            </nav>
+        </div>
+
+        <div class="user-panel">
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'profile' %}" class="username-link">👤 {{ user.username }}</a>
+
+            {% else %}
+
+                <a href="{% url 'login' %}" class="auth-btn">
+                    Войти
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</header>
+
+<main class="main-content container">
+
+    {% block content %}
+    {% endblock %}
+
+</main>
+
+<footer class="site-footer">
+
+    <div class="container">
+
+        <p>
+            © 2026 Платформа повышения квалификации
+        </p>
+
+    </div>
+
+</footer>
+
+</body>
+</html>
