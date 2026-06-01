@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Курсы{% endblock %}
+
+{% block content %}
+
+<h1>Курсы</h1>
+
+<div class="courses-grid">
+{% for course in courses %}
+  <a href="/courses/{{ course.id }}/" class="course-card">
+    {% if course.image_url %}
+      <img src="{{ course.image_url }}" alt="{{ course.title }}">
+    {% else %}
+      <div class="no-image">📚</div>
+    {% endif %}
+    <div class="course-title">{{ course.title }}</div>
+  </a>
+{% endfor %}
+</div>
+
+{% endblock %}

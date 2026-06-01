@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Мои курсы{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1 class="page-title">Мои курсы</h1>
+
+    {% if progresses %}
+
+        <div class="my-courses-grid">
+
+            {% for p in progresses %}
+                <div class="my-course-card">
+
+                    <h3>{{ p.course.title }}</h3>
+
+                    <p class="course-status">
+                        {% if p.score > 0 %}
+                            <span class="status success">Пройден</span>
+                        {% else %}
+                            <span class="status progress">В процессе</span>
+                        {% endif %}
+                    </p>
+                    {% if p.score > 0 %}
+                        <div class="progress-info">
+                            <div class="progress-line">
+                                <div class="progress-fill"
+                                    style="width: {% widthratio p.score 1 100 %}%;">
+                                </div>
+                            </div>
+
+                            <p class="progress-text">
+                                Успешность: {% widthratio p.score 1 100 %}%
+                            </p>
+                        </div>
+                    {% else %}
+                        <div class="progress-info">
+                            <div class="progress-line">
+                                <div class="progress-fill"
+                                    style="width: {% widthratio p.passed_tests p.total_tests 100 %}%;">
+                                </div>
+                            </div>
+
+                            <p class="progress-text">
+                                Прогресс прохождения
+                            </p>
+                        </div>
+
+                    {% endif %}
+                    
+                    <a href="{{ p.course.get_absolute_url }}" class="open-course-btn">
+                        Открыть курс
+                    </a>
+
+                </div>
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <p>У вас пока нет пройденных курсов</p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

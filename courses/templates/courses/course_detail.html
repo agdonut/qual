@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}{{ course.title }}{% endblock %}
+
+{% block content %}
+
+<style>
+.course-header {
+    background: #fff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+}
+
+.lesson-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 15px;
+    margin: 15px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: 0.2s ease;
+}
+
+.lesson-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.lesson-title {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    color: #1f2937;
+}
+
+.lesson-content {
+    color: #374151;
+    line-height: 1.5;
+}
+
+.test-box {
+    margin-top: 10px;
+    padding: 10px;
+    border-left: 4px solid #2563eb;
+    background: #f9fafb;
+    border-radius: 8px;
+}
+
+.test-box a {
+    text-decoration: none;
+    color: #2563eb;
+    font-weight: bold;
+}
+
+.test-box a:hover {
+    text-decoration: underline;
+}
+
+.complete-btn {
+    margin-top: 20px;
+    display: inline-block;
+}
+</style>
+
+<div class="course-header">
+    <h1>{{ course.title }}</h1>
+    <p>{{ course.description|linebreaks }}</p>
+</div>
+
+<h2>Уроки:</h2>
+
+{% for lesson in course.lessons.all %}
+    <div class="lesson-card">
+
+        <h3 class="lesson-title">{{ lesson.title }}</h3>
+
+        <div class="lesson-content">
+            {{ lesson.content|linebreaks }}
+        </div>
+
+        {% if lesson.test_set.all %}
+            <div class="test-box">
+                {% for test in lesson.test_set.all %}
+                    <div style="margin-top:8px;">
+                        <a href="/tests/{{ test.id }}/">
+                            Тест по уроку
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+    </div>
+
+{% empty %}
+    <p>No lessons yet</p>
+{% endfor %}
+
+<div class="complete-wrapper">
+    <form action="{% url 'complete_course' course.id %}" method="post">
+        {% csrf_token %}
+
+        <button type="submit" class="complete-btn">
+            Завершить курс
+        </button>
+    </form>
+</div>
+
+{% endblock %}
